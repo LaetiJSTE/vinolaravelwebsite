@@ -1,114 +1,38 @@
 <x-app-layout>
-    <form action="{{ route('bouteilles.store', $cellier->id) }}" method="post" enctype="multipart/form-data">
-        @csrf
 
-        <button id="btnSAQ">Choisir une bouteille de la SAQ</button>
-        <button id="btnPerso">Insérer une nouvelle bouteille (hors SAQ)</button>
-        
-        <template id="saqTemplate">
-            <div id="divSelect">
-                <label for="nom">Nom de la bouteille</label>
-                <select name="nom" id="nomSelect">
-                    <option value="">--Choisissez une bouteille--</option>
-                    @foreach ($bouteilles as $bouteille)
-                        <option value="{{ $bouteille->nom }}">{{ $bouteille->nom }}</option>
-                    @endforeach
-                </select>
-            </div>
+    <section class="form">
+        <h5 class="form-title">Ajouter une bouteille</h5><br>
+        <form action="{{ route('bouteilles.store', $cellier->id) }}" method="post">
+            @csrf
 
-            <div>
-                <label for="prix_achat">Prix d'achat</label>
-                <input type="number" name="prix_achat" id="prix_achat" placeholder="entrez prix">
-            </div>
+            <label for="nom"></label>
+            <select name="nom" id="nom">
+                @foreach ($bouteilles as $bouteille)
+                <option value="{{ $bouteille->nom }}">{{ $bouteille->nom }}</option>
+                @endforeach
+            </select>
+            <a href="{{ route('bouteilles.create', $cellier->id) }}">Generer</a>
+            
+            <label for="prix_achat">Prix d'achat</label>
+            <input type="number" name="prix_achat" id="prix_achat" placeholder="entrez prix">
+            {{-- <input type="number" name="prix_achat" id="prix_achat" placeholder="{{old('prix_achat', $bouteilles->prix_achat)}}"> --}}
+            
+            <label for="date_achat">Date d'achat</label>
+            <input type="date" name="date_achat" id="date_achat" placeholder="Entrez la date d'achat">
+            
+            <label for="millesime">Millesime</label>
+            <input type="number" name="millesime" id="millesime" placeholder="Entrez le millesime">
 
-            <div>
-                <label for="date_achat">Date d'achat</label>
-                <input type="date" name="date_achat" id="date_achat" placeholder="Entrez la date d'achat">
-            </div>
+            <label for="garde_jusqua">Garde jusqu'a</label>
+            <input type="date" name="garde_jusqua" id="garde_jusqua" placeholder="Entrez la date de garde">
 
-            <div>
-                <label for="millesime">Millesime</label>
-                <input type="year" name="millesime" id="millesime" placeholder="Entrez le millesime">
-            </div>
+            <label for="quantite">Quantite</label>
+            <input type="number" name="quantite" id="quantite" placeholder="Entrez la quantite">
 
-            <div>
-                <label for="garde_jusqua">Garde jusqu'a</label>
-                <input type="date" name="garde_jusqua" id="garde_jusqua" placeholder="Entrez la date de garde">
-            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
 
-            <div>
-                <label for="quantite">Quantite</label>
-                <input type="number" name="quantite" id="quantite" placeholder="Entrez la quantite">
-            </div>
-        </template>        
-
-        <template id="newBouteilleTemplate">
-            <div>
-                <label for="nom">Nom de la bouteille</label>
-                <input type="text" name="nom" id="nom" placeholder="Entrez le nom de la bouteille">
-            </div>
-
-            <div>
-                <label for="image">Image</label>
-                <input type="file" name="image" id="image" accept=".jpg, .png, .jpeg">
-            </div>
-
-            <div>
-                <label for="pays">Pays</label>
-                <input type="text" name="pays" id="pays" placeholder="Entrez le pays">
-            </div>
-
-            <div>
-                <label for="date_achat">Date d'achat</label>
-                <input type="date" name="date_achat" id="date_achat" placeholder="Entrez la date d'achat">
-            </div>
-
-            <div>
-                <label for="prix_achat">Prix d'achat</label>
-                <input type="number" name="prix_achat" id="prix_achat" placeholder="entrez prix">
-            </div>
-
-            <div>
-                <label for="type">Type</label>
-                <select name="type_id" id="type">
-                    <option value="1">Vin Blanc</option>
-                    <option value="2">Vin Rouge</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="quantite">Quantite</label>
-                <input type="number" name="quantite" id="quantite" placeholder="Entrez la quantite">
-            </div>
-
-            <div>
-                <label for="millesime">Millesime</label>
-                <input type="year" name="millesime" id="millesime" placeholder="Entrez le millesime">
-            </div>
-
-            <div>
-                <label for="garde_jusqua">Garde jusqu'a</label>
-                <input type="date" name="garde_jusqua" id="garde_jusqua" placeholder="Entrez la date de garde">
-            </div>
-
-            <div>
-                <label for="format">Format</label>
-                <input type="number" name="format" id="format" {{-- placeholder="ml" --}} maxlength="4">
-            </div>
-
-            <div>
-                <label for="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10"></textarea>
-            </div>
-        </template>
-
-
-        <div id="saqBouteille" style="display: none"></div>
-        
-        <section id="newBouteille" style="display: none"></section>
-
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-    </form>
+    </section>
 </x-app-layout>
 
 
