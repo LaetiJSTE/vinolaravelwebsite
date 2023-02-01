@@ -8,6 +8,7 @@ import { Form } from './Form.js'
   for (let i = 0, l = elForms.length; i < l; i++) {
     new Form(elForms[i]);
   }
+  
 })();
 
 
