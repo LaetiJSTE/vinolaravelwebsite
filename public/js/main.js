@@ -1,3 +1,17 @@
+import { Form } from './Form.js'
+
+(function () {
+
+  let elForms = document.querySelectorAll('[data-js-form]');  //ajouter dans form
+
+
+  for (let i = 0, l = elForms.length; i < l; i++) {
+    new Form(elForms[i]);
+  }
+})();
+
+
+
 /* //const BaseURL = "https://jmartel.webdev.cmaisonneuve.qc.ca/n61/vino/";
 const BaseURL = document.baseURI;
 console.log(BaseURL);
